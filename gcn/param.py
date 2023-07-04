@@ -5,8 +5,7 @@ def get_args():
     os.environ["CUDA_DEVICE_ORDER"] = "PCI_BUS_ID"
     os.environ["CUDA_VISIBLE_DEVICES"] = ""
     parser = argparse.ArgumentParser()
-    parser.add_argument('--no-cuda', action='store_true', default=False,
-                        help='Disables CUDA training.')
+    parser.add_argument('-d', '--device', default='cuda')
     parser.add_argument('--fastmode', action='store_true', default=False,
                         help='Validate during training pass.')
     parser.add_argument('--seed', type=int, default=42, help='Random seed.')
@@ -21,6 +20,6 @@ def get_args():
     parser.add_argument('--dropout', type=float, default=0.9,
                         help='Dropout rate (1 - keep probability).')
     parser.add_argument('--dataset', default='cora', help='Dataset name.')
-    args = parser.parse_args("")
+    args = parser.parse_args()
 
     return args

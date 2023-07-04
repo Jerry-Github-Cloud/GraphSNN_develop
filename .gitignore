@@ -2,6 +2,7 @@ gcn/data/
 gcn/out/
 gin/data/
 gin/splits/
+.vscode/
 
 *.pt
 

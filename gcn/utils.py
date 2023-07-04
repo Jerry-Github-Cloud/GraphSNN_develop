@@ -207,6 +207,26 @@ def load_citation_data(data):
     return adj_norm, adj, features, labels, idx_train, idx_val, idx_test
 
 
+def load_nell_data(data):
+    row, col = data['edge_index']
+    num_of_nodes = data.num_nodes
+    adj = torch.zeros(num_of_nodes, num_of_nodes)
+    for i in np.arange(row.shape[0]):
+        adj[row[i]][col[i]]=1.0
+    adj_norm = generate_adj(adj)
+    
+    features = data['x'].to_dense()
+    labels = data['y']
+    idx_train = data['train_mask']
+    idx_val = data['val_mask']
+    idx_test = data['test_mask']
+    
+    adj = adj.detach().numpy()
+    features = features.detach().numpy()
+    labels = labels.detach().numpy()
+    
+    return adj_norm, adj, features, labels, idx_train, idx_val, idx_test
+
 def generate_adj(adj):
     adj = adj.detach().numpy()
     adj = normalize(adj + sp.eye(adj.shape[0]))
