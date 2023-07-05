@@ -11,6 +11,8 @@
 using namespace std;
 using EdgeIndex = vector<pair<int, int>>;
 
+void print_iterable(vector<int> data);
+
 EdgeIndex loadEdgeIndexFromFile(const string& filename) {
     EdgeIndex edgeIndex;
 
@@ -67,9 +69,10 @@ vector<int> k_hop_subgraph(
         for (const auto& edge : edgeIndex) {
             if (visited.count(edge.first) > 0) {
                 new_nodes.insert(edge.second);
-            } else if (!directed && visited.count(edge.second) > 0) {
-                new_nodes.insert(edge.first);
-            }
+            } 
+            // else if (!directed && visited.count(edge.second) > 0) {
+            //     new_nodes.insert(edge.first);
+            // }
         }
 
         for (const auto& node : new_nodes) {
@@ -97,6 +100,7 @@ vector<vector<int>> get_all_neighbor_subgraph(const int num_nodes, const vector<
     vector<vector<int>> subgraph_list;
     for (int nodeIdx = 0; nodeIdx < num_nodes; nodeIdx ++) {
         subgraph_list.push_back(k_hop_subgraph({nodeIdx}, 1, edgeIndex));
+        print_iterable(subgraph_list[nodeIdx]);
     }
     return subgraph_list;
 }
@@ -207,7 +211,7 @@ int main() {
 
     // int m = structural_coeff.size(), n = structural_coeff[0].size();
     // for (int r = 0; r < m; r ++) {
-    //     // cout << "row " << r << ": "; 
+    //     cout << "row " << r << ": "; 
     //     for (int c = 0; c < n; c ++) {
     //         if (c == 0) {
     //             printf("%.2f", structural_coeff[r][c]);
