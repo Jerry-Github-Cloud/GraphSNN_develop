@@ -9,7 +9,6 @@
 #include <unordered_map>
 
 using namespace std;
-
 using EdgeIndex = vector<pair<int, int>>;
 
 EdgeIndex loadEdgeIndexFromFile(const string& filename) {
@@ -200,18 +199,23 @@ int main() {
     // print_iterable(v_subset);
 
     // [Demo] get_sc_matrix
+    clock_t start = clock();
     vector<vector<double>> structural_coeff = get_sc_matrix(num_nodes, edgeIndex, 1);
-    int m = structural_coeff.size(), n = structural_coeff[0].size();
-    for (int r = 0; r < m; r ++) {
-        // cout << "row " << r << ": "; 
-        for (int c = 0; c < n; c ++) {
-            if (c == 0) {
-                printf("%.2f", structural_coeff[r][c]);
-            } else {
-                printf(",%.2f", structural_coeff[r][c]);
-            }
-            // cout << structural_coeff[r][c] << " ";
-        }
-        cout << endl;
-    }
+    clock_t end = clock();
+    double duration = double(end - start) / CLOCKS_PER_SEC;
+    cout << "Execution time: " << duration << " seconds" << endl;
+
+    // int m = structural_coeff.size(), n = structural_coeff[0].size();
+    // for (int r = 0; r < m; r ++) {
+    //     // cout << "row " << r << ": "; 
+    //     for (int c = 0; c < n; c ++) {
+    //         if (c == 0) {
+    //             printf("%.2f", structural_coeff[r][c]);
+    //         } else {
+    //             printf(",%.2f", structural_coeff[r][c]);
+    //         }
+    //         // cout << structural_coeff[r][c] << " ";
+    //     }
+    //     cout << endl;
+    // }
 }
