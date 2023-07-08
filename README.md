@@ -90,3 +90,14 @@ class GNN_MM(nn.Module):
         x = self.gc2(x, sc)
         return F.log_softmax(x, dim=-1)
 ```
+
+### CUDA
+Parallel find all neightborhood subgraph using CUDA
+```
+nvcc --std c++17 -G -g -O3 -o sc_subgraph sc_subgraph.cu
+```
+
+| Dataset  | #nodes | #edges | official | CUDA      |
+| -------- | ------ |:------ |:-------- |:--------- |
+| Cora     | 2,708  | 10,556 | 7.10 sec | 2.22 sec  |
+| CiteSeer | 3,327  | 9,104  | 9.48 sec | 1.81  sec |
